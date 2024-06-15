@@ -14,7 +14,6 @@ class Author(BaseModel):
     books: List[Book] = []
 
 class Genre(BaseModel):
-    name: str
+    name: str  # TODO: add genre name validation using an enum 
     genre_id: int = Field(..., alias="id")
     parent_id: int = Field(..., alias="parentId")
-
