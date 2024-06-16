@@ -1,7 +1,20 @@
 from fastapi import FastAPI
 from .schemas import Book
+from .database import database
+from contextlib import asynccontextmanager
 
-app = FastAPI()
+@asynccontextmanager
+async def init_db():
+    database.init_db()
+
+def get_session():
+    db = database.get_session()
+    try:
+        yield db()
+    finally:
+        db().close()
+
+app = FastAPI(lifespan=init_db)
 
 testData = {
     "books": [
