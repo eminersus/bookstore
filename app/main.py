@@ -4,8 +4,10 @@ from .database import database
 from contextlib import asynccontextmanager
 
 @asynccontextmanager
-async def init_db():
+async def init_db(app: FastAPI):
     database.init_db()
+    yield
+    database.get_engine().dispose()
 
 def get_session():
     db = database.get_session()

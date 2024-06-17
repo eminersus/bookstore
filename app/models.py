@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship, declarative_base
+from sqlalchemy.orm import relationship, DeclarativeBase
 
-
-Base = declarative_base()
+class Base(DeclarativeBase):
+    pass
 
 class Book(Base):
     __tablename__ = "books"
@@ -21,6 +21,14 @@ class Author(Base):
     birth_date = Column(String)
     books = relationship("Book", back_populates="authors", secondary="book_author")
 
+class Genre(Base):
+    __tablename__ = "genres"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    parent_id = Column(Integer)
+    books = relationship("Book", back_populates="genres", secondary="book_genre")
+
 class book_genre(Base):
     __tablename__ = "book_genre"
 
@@ -32,11 +40,3 @@ class book_author(Base):
 
     author_id = Column(Integer, ForeignKey('authors.id'), primary_key=True)
     book_id = Column(Integer, ForeignKey('books.id'), primary_key=True)
-
-class Genre(Base):
-    __tablename__ = "genres"
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
-    parent_id = Column(Integer)
-    books = relationship("Book", back_populates="genres", secondary="book_genre")
