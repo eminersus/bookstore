@@ -1,0 +1,185 @@
+[
+    {
+        "name": "Fiction",
+        "children": [
+            {
+                "name": "Science Fiction",
+                "children":[
+                    {
+                        "name": "Dystopian",
+                        "children":[]
+                    },
+                    {
+                        "name": "Space Opera",
+                        "children":[
+                            {
+                                "name": "Military Sci-Fi",
+                                "children":[]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Fantasy",
+                "children":[
+                    {
+                        "name": "Urban Fantasy",
+                        "children":[]
+                    },
+                    {
+                        "name": "High Fantasy",
+                        "children":[
+                            {
+                                "name": "Epic Fantasy",
+                                "children":[]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name" : "Mystery",
+                "children":[
+                    {
+                        "name": "Detective",
+                        "children":[]
+                    },
+                    {
+                        "name": "Cozy Mystery",
+                        "children":[]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Non-Fiction",
+        "children": [
+            {
+                "name": "Biography",
+                "children":[
+                    {
+                        "name": "Historical Biography",
+                        "children":[]
+                    },
+                    {
+                        "name": "Memoir",
+                        "children":[]
+                    }
+                ]
+            },
+            {
+                "name": "Self-Help",
+                "children":[
+                    {
+                        "name": "Personal Development",
+                        "children":[
+                            {
+                                "name": "Motivational",
+                                "children":[]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Psychology",
+                        "children":[]
+                    }
+                ]
+            },
+            {
+                "name": "History",
+                "children":[
+                    {
+                        "name": "Ancient History",
+                        "children":[]
+                    },
+                    {
+                        "name": "Modern History",
+                        "children":[
+                            {
+                                "name": "World War II",
+                                "children":[]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Children's Books",
+        "children": [
+            {
+                "name": "Picture Books",
+                "children":[]
+            },
+            {
+                "name": "Young Adult",
+                "children":[
+                    {
+                        "name": "Fantasy",
+                        "children":[]
+                    },
+                    {
+                        "name": "Romance",
+                        "children":[]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Romance",
+        "children": [
+            {
+                "name": "Contemporary Romance",
+                "children":[]
+            },
+            {
+                "name": "Historical Romance",
+                "children":[
+                    {
+                        "name": "Regency Romance",
+                        "children":[]
+                    },
+                    {
+                        "name": "Victorian Romance",
+                        "children":[]
+                    }
+                ]
+            },
+            {
+                "name": "Paranormal Romance",
+                "children":[
+                    {
+                        "name": "Vampire Romance",
+                        "children":[]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Horror",
+        "children": [
+            {
+                "name": "Gothic Horror",
+                "children":[]
+            },
+            {
+                "name": "Psychological Horror",
+                "children":[]
+            },
+            {
+                "name": "Supernatural Horror",
+                "children":[
+                    {
+                        "name": "Ghost Stories",
+                        "children":[]
+                    }
+                ]
+            }
+        ]
+    }
+]

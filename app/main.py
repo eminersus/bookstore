@@ -6,15 +6,10 @@ from contextlib import asynccontextmanager
 @asynccontextmanager
 async def init_db(app: FastAPI):
     database.init_db()
+    database.insert_seed_genres_data()
     yield
     database.get_engine().dispose()
 
-def get_session():
-    db = database.get_session()
-    try:
-        yield db()
-    finally:
-        db().close()
 
 app = FastAPI(lifespan=init_db)
 

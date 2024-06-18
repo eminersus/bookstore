@@ -8,7 +8,7 @@ class Book(Base):
     __tablename__ = "books"
 
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String)
+    title = Column(String, nullable=False)
     published_date = Column(String)
     authors = relationship("Author", back_populates="books", secondary="book_author")
     genres = relationship("Genre", back_populates="books", secondary="book_genre")
@@ -25,9 +25,16 @@ class Genre(Base):
     __tablename__ = "genres"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
-    parent_id = Column(Integer)
+    name = Column(String, nullable=False)
+    parent_id = Column(Integer, ForeignKey('genres.id'), nullable=True)
     books = relationship("Book", back_populates="genres", secondary="book_genre")
+
+class GenreHierarchy(Base):
+    __tablename__ = "genre_hierarchy"
+    id = Column(Integer, primary_key=True)
+    genre_id = Column(Integer, ForeignKey('genres.id'), primary_key=True)
+    children = Column(Integer, ForeignKey('genre.id'), primary_key=True)
+
 
 class book_genre(Base):
     __tablename__ = "book_genre"

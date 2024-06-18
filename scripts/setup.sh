@@ -4,6 +4,13 @@
 SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 
+#Deactivate virtual environment if exists
+if [ -d "$ROOT_DIR/venv" ]; then
+    source deactivate
+    rm -rf $ROOT_DIR/venv
+    echo "Deactivated existing virtual environment"
+fi
+
 #Create a python virtual environment
 python3 -m venv $ROOT_DIR/venv
 echo "Virtual environment created"
