@@ -24,17 +24,10 @@ class Author(Base):
 class Genre(Base):
     __tablename__ = "genres"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, nullable=False)
-    parent_id = Column(Integer, ForeignKey('genres.id'), nullable=True)
+    path = Column(String, nullable=False)
     books = relationship("Book", back_populates="genres", secondary="book_genre")
-
-class GenreHierarchy(Base):
-    __tablename__ = "genre_hierarchy"
-    id = Column(Integer, primary_key=True)
-    genre_id = Column(Integer, ForeignKey('genres.id'), primary_key=True)
-    children = Column(Integer, ForeignKey('genre.id'), primary_key=True)
-
 
 class book_genre(Base):
     __tablename__ = "book_genre"

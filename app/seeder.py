@@ -9,10 +9,9 @@ def get_seed_genre_data():
         genres = load(file)
         return genres
     
-def insert_genre_data(data, session: Session, parent_id : int = None):
+def insert_genre_data(data, session: Session, parent_path="/"):
     for item in data:
-        genre = schemas.GenreCreate(name=item["name"], parent_id=parent_id)
-        new_id = create_genre(session, genre)
+        genre = schemas.GenreCreate(name=item["name"], path=f"{parent_path}{item["id"]}/")
+        create_genre(session, genre)
         if "children" in item:
-            insert_genre_data(item["children"], session, new_id)
-            
+            insert_genre_data(item["children"], session, genre.path)

@@ -15,7 +15,7 @@ class Author(BaseModel):
 
 class GenreBase(BaseModel):
     name: str
-    parent_id: int | None = None
+    path: str
 
 class GenreCreate(GenreBase):
     pass
