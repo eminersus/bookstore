@@ -1,17 +1,40 @@
-from pydantic import BaseModel, Field, conlist
-from typing import List
-from datetime import datetime, date
+from pydantic import BaseModel, Field, ConfigDict
+from typing import List, Type
+from datetime import date
 
-class Book(BaseModel):
+
+class BookBase(BaseModel):
     title: str
-    published_date: date = Field(..., alias="publishedDate")
-    authors: List[str] = Field(..., min_length=1) # TODO: change these to @validate
-    genres: List[str] = Field(..., min_length=1) # TODO: change these to @validate
+    published_date: date
 
-class Author(BaseModel):
-    full_name: str = Field(..., alias="fullName")
-    birth_date: date = Field(..., alias="birthDate")
-    books: List[Book] = []
+class BookCreate(BookBase):
+    genres: List[int]
+    authors: List[int]
+
+class Book(BookBase):
+    id: int
+    genres: List['GenreWOBooks'] = Field(..., min_length=1)
+    authors: List['AuthorWOBooks'] = Field(..., min_length=1)
+    class Config:
+        orm_mode = True
+        from_attributes=True
+
+class AuthorBase(BaseModel):
+    full_name: str
+    birth_date: date
+
+class AuthorCreate(AuthorBase):
+    pass
+
+class BookInAuthors(BookBase):
+    pass
+
+class Author(AuthorBase):
+    id: int
+    books: List[BookInAuthors] = []
+    class Config:
+        orm_mode = True
+        from_attributes=True
 
 class GenreBase(BaseModel):
     name: str
@@ -22,3 +45,21 @@ class GenreCreate(GenreBase):
 
 class Genre(GenreBase):
     id: int
+    class Config:
+        orm_mode = True
+        from_attributes=True
+
+class GenreWOBooks(GenreBase):
+    id: int
+    class Config:
+        orm_mode = True
+        from_attributes=True
+
+class AuthorWOBooks(AuthorBase):
+    id: int
+    class Config:
+        orm_mode = True
+        from_attributes=True
+
+    
+Book.model_rebuild()
