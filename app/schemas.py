@@ -13,8 +13,12 @@ class Author(BaseModel):
     birth_date: date = Field(..., alias="birthDate")
     books: List[Book] = []
 
-class Genre(BaseModel):
+class GenreBase(BaseModel):
     name: str
-    genre_id: int = Field(..., alias="id")
-    parent_id: int = Field(..., alias="parentId")
+    path: str
 
+class GenreCreate(GenreBase):
+    pass
+
+class Genre(GenreBase):
+    id: int

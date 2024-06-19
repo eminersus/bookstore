@@ -1,0 +1,232 @@
+[
+    {
+        "id": 1,
+        "name": "Fiction",
+        "children": [
+            {
+                "id": 2,
+                "name": "Science Fiction",
+                "children": [
+                    {
+                        "id": 3,
+                        "name": "Dystopian",
+                        "children": []
+                    },
+                    {
+                        "id": 4,
+                        "name": "Space Opera",
+                        "children": [
+                            {
+                                "id": 5,
+                                "name": "Military Sci-Fi",
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 6,
+                "name": "Fantasy",
+                "children": [
+                    {
+                        "id": 7,
+                        "name": "Urban Fantasy",
+                        "children": []
+                    },
+                    {
+                        "id": 8,
+                        "name": "High Fantasy",
+                        "children": [
+                            {
+                                "id": 9,
+                                "name": "Epic Fantasy",
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 10,
+                "name": "Mystery",
+                "children": [
+                    {
+                        "id": 11,
+                        "name": "Detective",
+                        "children": []
+                    },
+                    {
+                        "id": 12,
+                        "name": "Cozy Mystery",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Non-Fiction",
+        "children": [
+            {
+                "id": 14,
+                "name": "Biography",
+                "children": [
+                    {
+                        "id": 15,
+                        "name": "Historical Biography",
+                        "children": []
+                    },
+                    {
+                        "id": 16,
+                        "name": "Memoir",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 17,
+                "name": "Self-Help",
+                "children": [
+                    {
+                        "id": 18,
+                        "name": "Personal Development",
+                        "children": [
+                            {
+                                "id": 19,
+                                "name": "Motivational",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "id": 20,
+                        "name": "Psychology",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 21,
+                "name": "History",
+                "children": [
+                    {
+                        "id": 22,
+                        "name": "Ancient History",
+                        "children": []
+                    },
+                    {
+                        "id": 23,
+                        "name": "Modern History",
+                        "children": [
+                            {
+                                "id": 24,
+                                "name": "World War II",
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 25,
+        "name": "Children's Books",
+        "children": [
+            {
+                "id": 26,
+                "name": "Picture Books",
+                "children": [
+                    {
+                        "id": 27,
+                        "name": "Bedtime Stories",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 28,
+                "name": "Young Adult",
+                "children": [
+                    {
+                        "id": 29,
+                        "name": "Fantasy",
+                        "children": []
+                    },
+                    {
+                        "id": 30,
+                        "name": "Romance",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 31,
+        "name": "Romance",
+        "children": [
+            {
+                "id": 32,
+                "name": "Contemporary Romance",
+                "children": []
+            },
+            {
+                "id": 33,
+                "name": "Historical Romance",
+                "children": [
+                    {
+                        "id": 34,
+                        "name": "Regency Romance",
+                        "children": []
+                    },
+                    {
+                        "id": 35,
+                        "name": "Victorian Romance",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 36,
+                "name": "Paranormal Romance",
+                "children": [
+                    {
+                        "id": 37,
+                        "name": "Vampire Romance",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 38,
+        "name": "Horror",
+        "children": [
+            {
+                "id": 39,
+                "name": "Gothic Horror",
+                "children": []
+            },
+            {
+                "id": 40,
+                "name": "Psychological Horror",
+                "children": []
+            },
+            {
+                "id": 41,
+                "name": "Supernatural Horror",
+                "children": [
+                    {
+                        "id": 42,
+                        "name": "Ghost Stories",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    }
+]
