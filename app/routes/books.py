@@ -37,11 +37,11 @@ async def delete_book(book_id: int, db: Session = Depends(database.get_session))
     return crud.delete_book(book_id, db)
 
 @router.post("/books/{book_id}/authors", response_model = schemas.Book)
-async def add_authors_to_book(book_id: int, author_ids: List[int], db: Session = Depends(database.get_session)) -> schemas.Book:
+async def add_authors_to_book(book_id: int, request: schemas.AddAuthorsToBookRequest, db: Session = Depends(database.get_session)) -> schemas.Book:
     """
     This endpoint adds authors to a book. The authors are specified by their IDs in the request body.
     """
-    return crud.add_authors_to_book(book_id, author_ids, db)
+    return crud.add_authors_to_book(book_id, request.author_ids, db)
 
 @router.put("/books/{book_id}", response_model = schemas.Book)
 async def update_book(book_id: int, book_data: schemas.BookCreate, db: Session = Depends(database.get_session)) -> schemas.Book:

@@ -58,5 +58,8 @@ class AuthorWOBooks(AuthorBase):
 
 class AddBookToGenreRequest(BaseModel):
     book_id: int
+
+class AddAuthorsToBookRequest(BaseModel):
+    author_ids: List[int]
     
 Book.model_rebuild()
