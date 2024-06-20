@@ -26,7 +26,7 @@ class Genre_DB(Base):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, nullable=False)
-    path = Column(String, nullable=False)
+    path = Column(String, nullable=False, index=True)
     books = relationship("Book_DB", back_populates="genres", secondary="book_genre")
 
 class book_genre_db(Base):
