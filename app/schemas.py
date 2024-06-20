@@ -16,7 +16,6 @@ class Book(BookBase):
     genres: List['GenreWOBooks'] = Field(..., min_length=1)
     authors: List['AuthorWOBooks'] = Field(..., min_length=1)
     class Config:
-        orm_mode = True
         from_attributes=True
 
 class AuthorBase(BaseModel):
@@ -33,7 +32,6 @@ class Author(AuthorBase):
     id: int
     books: List[BookInAuthors] = []
     class Config:
-        orm_mode = True
         from_attributes=True
 
 class GenreBase(BaseModel):
@@ -46,19 +44,16 @@ class GenreCreate(GenreBase):
 class Genre(GenreBase):
     id: int
     class Config:
-        orm_mode = True
         from_attributes=True
 
 class GenreWOBooks(GenreBase):
     id: int
     class Config:
-        orm_mode = True
         from_attributes=True
 
 class AuthorWOBooks(AuthorBase):
     id: int
     class Config:
-        orm_mode = True
         from_attributes=True
 
     
