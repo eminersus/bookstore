@@ -14,7 +14,7 @@ def get_all_books(db: Session):
 def get_books_by_genre_id(genre_id: int, db: Session):
     genre = db.query(models.Genre_DB).filter(models.Genre_DB.id == genre_id).first()
     if genre is None:
-        raise HTTPException(status_code=404, detail="Genre not found")
+        raise HTTPException(status_code=404, detail=f'Genre with id: {genre_id} is not found')
     
     genre_path = genre.path
     subgenres = db.query(models.Genre_DB).filter(models.Genre_DB.path.like(f"{genre_path}%")).all()
@@ -27,7 +27,7 @@ def get_books_by_author_id(author_id: int, db: Session):
 def get_book_by_id(book_id: int, db: Session):
     book = db.query(models.Book_DB).filter(models.Book_DB.id == book_id).first()
     if book is None:
-        raise HTTPException(status_code=404, detail="Book not found")
+        raise HTTPException(status_code=404, detail=f'Book with id: {book_id} is not found')
     return book
 
 def create_genre(genre: schemas.GenreCreate, db: Session):
@@ -76,7 +76,7 @@ def create_author(author_data: schemas.Author, db: Session) -> schemas.Author:
 def delete_book(book_id: int, db: Session) -> schemas.Book:
     book = db.query(models.Book_DB).filter(models.Book_DB.id == book_id).first()
     if book is None:
-        raise HTTPException(status_code=404, detail="Book not found")
+        raise HTTPException(status_code=404, detail=f'Book with id: {book_id} is not found')
     
     db.delete(book)
     db.commit()
@@ -85,7 +85,7 @@ def delete_book(book_id: int, db: Session) -> schemas.Book:
 def add_authors_to_book(book_id: int, author_ids: list[int], db: Session) -> schemas.Book:
     book = db.query(models.Book_DB).filter(models.Book_DB.id == book_id).first()
     if book is None:
-        raise HTTPException(status_code=404, detail="Book not found")
+        raise HTTPException(status_code=404, detail=f'Book with id: {book_id} is not found')
     authors = db.query(models.Author_DB).filter(models.Author_DB.id.in_(author_ids)).all()
     if len(authors) != len(author_ids):
         raise HTTPException(status_code=400, detail="One or more authors do not exist")
@@ -99,10 +99,10 @@ def add_authors_to_book(book_id: int, author_ids: list[int], db: Session) -> sch
 def add_book_to_genre(genre_id: int, book_id: int, db: Session) -> schemas.Book:
     genre = db.query(models.Genre_DB).filter(models.Genre_DB.id == genre_id).first()
     if genre is None:
-        raise HTTPException(status_code=404, detail="Genre not found")
+        raise HTTPException(status_code=404, detail=f'Genre with id: {genre_id} is not found')
     book = db.query(models.Book_DB).filter(models.Book_DB.id == book_id).first()
     if book is None:
-        raise HTTPException(status_code=404, detail="Book not found")
+        raise HTTPException(status_code=404, detail=f'Book with id: {book_id} is not found')
     if book not in genre.books:
         genre.books.append(book)
     db.commit()
@@ -112,7 +112,7 @@ def add_book_to_genre(genre_id: int, book_id: int, db: Session) -> schemas.Book:
 def update_book(book_id: int, book_data: schemas.BookUpdate, db: Session) -> schemas.Book:
     book = db.query(models.Book_DB).filter(models.Book_DB.id == book_id).first()
     if book is None:
-        raise HTTPException(status_code=404, detail="Book not found")
+        raise HTTPException(status_code=404, detail=f'Book with id: {book_id} is not found')
     
     if book_data.title:
         book.title = book_data.title
