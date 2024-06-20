@@ -15,8 +15,9 @@ class Book(BookBase):
     id: int
     genres: List['GenreWOBooks'] = Field(..., min_length=1)
     authors: List['AuthorWOBooks'] = Field(..., min_length=1)
-    class Config:
-        from_attributes=True
+    model_config: ConfigDict = {
+        'from_attributes': True
+    }
 
 class AuthorBase(BaseModel):
     full_name: str
@@ -31,8 +32,9 @@ class BookInAuthors(BookBase):
 class Author(AuthorBase):
     id: int
     books: List[BookInAuthors] = []
-    class Config:
-        from_attributes=True
+    model_config: ConfigDict = {
+        'from_attributes': True
+    }
 
 class GenreBase(BaseModel):
     name: str
@@ -43,18 +45,21 @@ class GenreCreate(GenreBase):
 
 class Genre(GenreBase):
     id: int
-    class Config:
-        from_attributes=True
+    model_config: ConfigDict = {
+        'from_attributes': True
+    }
 
 class GenreWOBooks(GenreBase):
     id: int
-    class Config:
-        from_attributes=True
+    model_config: ConfigDict = {
+        'from_attributes': True
+    }
 
 class AuthorWOBooks(AuthorBase):
     id: int
-    class Config:
-        from_attributes=True
+    model_config: ConfigDict = {
+        'from_attributes': True
+    }
 
 class AddBookToGenreRequest(BaseModel):
     book_id: int
