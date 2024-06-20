@@ -4,9 +4,9 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 import os
 from app.main import app
-from app.database import database
+from app.database.database import database
 from app.models import Base
-from app.seeder import get_seed_genre_data, insert_genre_data
+from app.database.seeder import get_seed_genre_data, insert_genre_data
 
 
 SQLALCHEMY_DATABASE_URL_TEST = os.getenv("DATABASE_URL_TEST")

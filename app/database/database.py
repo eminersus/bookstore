@@ -1,10 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from fastapi import Depends
-from .config import Settings
-from . import models
+from ..config import Settings
+from .. import models
 from .seeder import get_seed_genre_data, insert_genre_data
-from contextlib import contextmanager, asynccontextmanager
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 class Database:

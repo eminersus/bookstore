@@ -1,8 +1,7 @@
 from sqlalchemy.orm import Session
-
 from fastapi import HTTPException
-from . import models
-from . import schemas
+from .. import models
+from .. import schemas
 
 
 def get_all_genres(db: Session):
@@ -21,7 +20,7 @@ def get_books_by_genre_id(genre_id: int, db: Session):
     genre_ids = [genre.id for genre in subgenres]
     return db.query(models.Book_DB).join(models.book_genre_db).filter(models.book_genre_db.genre_id.in_(genre_ids)).distinct(models.Book_DB.id).all()
 
-def get_books_by_author_id(author_id: int, db: Session):
+def get_books_by_author_id(author_id: int, db: Session): #TODO: check author_id exists or not
     return db.query(models.Book_DB).join(models.book_author_db).filter(models.book_author_db.author_id == author_id).all()
 
 def get_book_by_id(book_id: int, db: Session):

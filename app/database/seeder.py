@@ -1,11 +1,11 @@
 from json import load
 from . import crud
-from . import schemas
+from .. import schemas
 from sqlalchemy.orm import Session
 
 
 def get_seed_genre_data():
-    with open("./app/data/genre_tree.json") as file:
+    with open("./app/resources/genre_tree.json") as file:
         genres = load(file)
         return genres
     
