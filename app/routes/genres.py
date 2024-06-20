@@ -21,10 +21,10 @@ async def get_books_by_genre_id(genre_id: int, session: Session = Depends(databa
     """
     return crud.get_books_by_genre_id(genre_id, session)
 
-@router.post("/genres/{genre_id}/books", response_model=schemas.Genre)
-async def add_book_to_genre(genre_id: int, book_id: int, session: Session = Depends(database.get_session)) -> schemas.Genre:
+@router.post("/genres/{genre_id}/books", response_model=schemas.Book)
+async def add_book_to_genre(genre_id: int, request: schemas.AddBookToGenreRequest, session: Session = Depends(database.get_session)) -> schemas.Book:
     """
     This endpoint adds a book to a genre. The book is specified by its ID in the request body.
     """
-    return crud.add_book_to_genre(genre_id, book_id, session)
+    return crud.add_book_to_genre(genre_id, request.book_id, session)
 

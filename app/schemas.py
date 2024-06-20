@@ -56,5 +56,7 @@ class AuthorWOBooks(AuthorBase):
     class Config:
         from_attributes=True
 
+class AddBookToGenreRequest(BaseModel):
+    book_id: int
     
 Book.model_rebuild()

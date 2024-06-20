@@ -12,20 +12,23 @@ def get_all_books(db: Session):
     return db.query(models.Book_DB).all()
 
 def get_books_by_genre_id(genre_id: int, db: Session):
-    genre_path = db.query(models.Genre_DB).filter(models.Genre_DB.id == genre_id).first().path
+    genre = db.query(models.Genre_DB).filter(models.Genre_DB.id == genre_id).first()
+    if genre is None:
+        raise HTTPException(status_code=404, detail="Genre not found")
+    
+    genre_path = genre.path
     subgenres = db.query(models.Genre_DB).filter(models.Genre_DB.path.like(f"{genre_path}%")).all()
-
     genre_ids = [genre.id for genre in subgenres]
     return db.query(models.Book_DB).join(models.book_genre_db).filter(models.book_genre_db.genre_id.in_(genre_ids)).distinct(models.Book_DB.id).all()
 
 def get_books_by_author_id(author_id: int, db: Session):
     return db.query(models.Book_DB).join(models.book_author_db).filter(models.book_author_db.author_id == author_id).all()
 
-def get_books_by_author_and_genre_id(author_id: int, genre_id: int, db: Session):
-    pass
-
 def get_book_by_id(book_id: int, db: Session):
-    return db.query(models.Book_DB).filter(models.Book_DB.id == book_id).first()
+    book = db.query(models.Book_DB).filter(models.Book_DB.id == book_id).first()
+    if book is None:
+        raise HTTPException(status_code=404, detail="Book not found")
+    return book
 
 def create_genre(genre: schemas.GenreCreate, db: Session):
     db_genre = models.Genre_DB(name=genre.name, path=genre.path)
@@ -62,7 +65,6 @@ def create_book(book_data: schemas.BookCreate, db: Session) -> schemas.Book:
 
     return new_book
 
-
 def create_author(author_data: schemas.Author, db: Session) -> schemas.Author:
     new_author = models.Author_DB(full_name=author_data.full_name, birth_date=author_data.birth_date)
     db.add(new_author)
@@ -94,4 +96,15 @@ def add_authors_to_book(book_id: int, author_ids: list[int], db: Session) -> sch
     db.refresh(book)
     return book
 
-    
+def add_book_to_genre(genre_id: int, book_id: int, db: Session) -> schemas.Book:
+    genre = db.query(models.Genre_DB).filter(models.Genre_DB.id == genre_id).first()
+    if genre is None:
+        raise HTTPException(status_code=404, detail="Genre not found")
+    book = db.query(models.Book_DB).filter(models.Book_DB.id == book_id).first()
+    if book is None:
+        raise HTTPException(status_code=404, detail="Book not found")
+    if book not in genre.books:
+        genre.books.append(book)
+    db.commit()
+    db.refresh(book)
+    return book
