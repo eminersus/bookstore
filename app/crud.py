@@ -108,3 +108,30 @@ def add_book_to_genre(genre_id: int, book_id: int, db: Session) -> schemas.Book:
     db.commit()
     db.refresh(book)
     return book
+
+def update_book(book_id: int, book_data: schemas.BookUpdate, db: Session) -> schemas.Book:
+    book = db.query(models.Book_DB).filter(models.Book_DB.id == book_id).first()
+    if book is None:
+        raise HTTPException(status_code=404, detail="Book not found")
+    
+    if book_data.title:
+        book.title = book_data.title
+
+    if book_data.published_date:
+        book.published_date = book_data.published_date
+
+    if book_data.authors:
+        authors = db.query(models.Author_DB).filter(models.Author_DB.id.in_(book_data.authors)).all()
+        if len(authors) != len(book_data.authors):
+            raise HTTPException(status_code=400, detail="One or more authors do not exist")
+        book.authors = authors
+        
+    if book_data.genres:
+        genres = db.query(models.Genre_DB).filter(models.Genre_DB.id.in_(book_data.genres)).all()
+        if len(genres) != len(book_data.genres):
+            raise HTTPException(status_code=400, detail="One or more genres do not exist")
+        book.genres = genres
+    
+    db.commit()
+    db.refresh(book)
+    return book

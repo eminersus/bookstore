@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, ConfigDict
-from typing import List, Type
+from typing import List, Optional
 from datetime import date
 
 
@@ -61,5 +61,12 @@ class AddBookToGenreRequest(BaseModel):
 
 class AddAuthorsToBookRequest(BaseModel):
     author_ids: List[int]
+
+class BookUpdate(BaseModel):
+    # all fields are optional
+    title: Optional[str] = None
+    published_date: Optional[date] = None
+    genres: Optional[List[int]] = None
+    authors: Optional[List[int]] = None
     
 Book.model_rebuild()

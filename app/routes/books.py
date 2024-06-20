@@ -44,7 +44,7 @@ async def add_authors_to_book(book_id: int, request: schemas.AddAuthorsToBookReq
     return crud.add_authors_to_book(book_id, request.author_ids, db)
 
 @router.put("/books/{book_id}", response_model = schemas.Book)
-async def update_book(book_id: int, book_data: schemas.BookCreate, db: Session = Depends(database.get_session)) -> schemas.Book:
+async def update_book(book_id: int, book_data: schemas.BookUpdate, db: Session = Depends(database.get_session)) -> schemas.Book:
     """
     This endpoint updates a book in the database.
     """
