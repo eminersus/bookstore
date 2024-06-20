@@ -3,8 +3,10 @@
 This project is built using **FastAPI** and **SQLite**. It is a simple API for a bookstore, enabling users to add, update, delete, and view books based on their title, author, and genre.
 
 ## **Requirements**
-- **Python 3.11** or higher
+- **Python 3.12**
+- **Docker**
 - **Terminal**
+
 
 ## **Features**
 This API provides the following features:
@@ -33,24 +35,24 @@ This API provides the following features:
     cd bookstore
     ```
 
-3. **Set the environment variables in the `.env` file:**
+3. **Set the environment variables `DATABASE_URL` and `DATABASE_URL_TEST` in the `docker-compose.yml` file:**
     ```plaintext
-    DATABASE_URL=sqlite:///example.db 
-    DATABASE_URL_TEST=sqlite:///test.db
+    DATABASE_URL: sqlite:///bookstore.db 
+    DATABASE_URL_TEST: sqlite:///test.db
+    ```
+4. **Build the Docker containers:**
+    ```bash
+    docker-compose build
     ```
 
-4. **Run the setup script to create a virtual environment, install dependencies, and set environment variables:**
+5. **Run the web service:**
     ```bash
-    source ./scripts/setup.sh
-    ```
-    (You may need to give the script execution permission to run it)
-    ```bash
-    chmod +x ./scripts/setup.sh
+    docker-compose up web
     ```
 
-5. **Run the application for local deployment:**
+6. **Run the tests: (Optional)**
     ```bash
-    uvicorn app.main:app --reload
+    docker-compose run test
     ```
 
 ## **Usage**
@@ -94,11 +96,11 @@ Genres are initially given as a hierarchical data structure as can be seen under
 The `path` field of the Crime genre will be `/1/2/3/`. The `path` field of the Romance genre will be `/1/4/`.
 
 ## **Testing**
-The tests of the endpoints are written using **Pytest**. The root folder of the tests is the `tests/` directory. To run the tests, you can use the following command directly in the terminal while on the root directory of the project:
+The tests of the endpoints are written using **Pytest**. The root folder of the tests is the `tests/` directory. To run the tests:
 ```bash
-pytest
+docker-compose run test
 ```
-**Pytest** automatically discovers the tests in the `tests/` directory and runs them. The test database is isolated from the main database, and the data is not shared between the tests. The test database is created using the `DATABASE_TEST_URL` environment variable in the `.env` file.
+**Pytest** automatically discovers the tests in the `tests/` directory and runs them. The test database is isolated from the main database, and the data is not shared between the tests. The test database is created using the `DATABASE_TEST_URL` environment variable `docker-compose.yml` file
 
 ## **Summary**
 This API is a simple bookstore API that provides basic CRUD operations for books, authors, and genres. To contact, you can reach me at [eminersus@gmail.com](mailto:eminersus@gmail.com).

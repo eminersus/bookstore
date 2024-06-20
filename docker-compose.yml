@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+
+    environment:
+      DATABASE_URL: "sqlite:///example.db"
+      DATABASE_URL_TEST: "sqlite:///example.db"
+    
+    volumes:
+      - .:/app
+
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+  test:
+    build: .
+    environment:
+      DATABASE_URL: "sqlite:///example.db"
+      DATABASE_URL_TEST: "sqlite:///example.db"
+    volumes:
+      - .:/app
+    command: pytest
